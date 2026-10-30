@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ata-recorder-seed42"
+version = "0.1.0"
+description = "Shadow scorer for the DAPT20 ATA recoder seed-42 model"
+requires-python = ">=3.10"
+dependencies = [
+  "torch==2.7.1",
+  "transformers==4.45.2",
+  "safetensors>=0.4.5",
+  "numpy==1.26.4",
+  "pandas>=2.0.0",
+  "pymongo>=4.8.0",
+  "tqdm>=4.66.0",
+]
+
+[project.scripts]
+ata-recorder-shadow = "ata_recoder_seed42.mongo_shadow:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

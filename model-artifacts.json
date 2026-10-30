@@ -1,0 +1,16 @@
+{
+  "model_version": "dapt20-seed42-v1",
+  "run_id": "amiable_pig_jxwwf4gpyr",
+  "model_directory": "azureml://datastores/workspaceblobstore/paths/azureml/amiable_pig_jxwwf4gpyr/ensemble_results/models/seed42/",
+  "encoder_config_directory": "azureml://subscriptions/c450f3d1-583c-495f-b5d3-0b38b99e70c0/resourcegroups/ba-p-zeaus-group020-rg/workspaces/p-group020-aml-ws-001/datastores/workspaceblobstore/paths/azureml/willing_okra_y1ydrgh6yc/dapt_encoder/",
+  "tokenizer": "included in models/seed42/best_model",
+  "label_maps": "included at models/seed42/label_maps.json",
+  "weights": "included at models/seed42/best_model/model.safetensors; do not commit model weights to Git",
+  "inference": {
+    "max_length": 256,
+    "stride": 128,
+    "window_aggregation": "mean probabilities",
+    "joint_alpha": 1.0,
+    "top_k": 5
+  }
+}

@@ -1,0 +1,26 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type: command
+display_name: ata-recorder-dapt20-seed42-shadow-readonly
+experiment_name: ata-recorder-seed42-shadow
+compute: azureml:low-nc24h100-gpu
+code: .
+environment: azureml:atapeanuts:14
+inputs:
+  seed42_model:
+    type: uri_folder
+    path: azureml://datastores/workspaceblobstore/paths/azureml/amiable_pig_jxwwf4gpyr/ensemble_results/models/seed42/
+  encoder_config:
+    type: uri_folder
+    path: azureml://subscriptions/c450f3d1-583c-495f-b5d3-0b38b99e70c0/resourcegroups/ba-p-zeaus-group020-rg/workspaces/p-group020-aml-ws-001/datastores/workspaceblobstore/paths/azureml/willing_okra_y1ydrgh6yc/dapt_encoder/
+  mongo_uri_file:
+    type: uri_file
+    path: azureml://datastores/group020orionadls/paths/ata_rec_delays/secrets/mongodb_dev_pw.txt
+outputs:
+  shadow_logs:
+    type: uri_folder
+command: >-
+  export TRANSFORMERS_OFFLINE=1 HF_HUB_OFFLINE=1 HF_HUB_DISABLE_TELEMETRY=1 USE_TF=0 OMP_NUM_THREADS=16 MKL_NUM_THREADS=16 &&
+  python -m pip install . &&
+  ata-recorder-shadow --model-dir ${{inputs.seed42_model}} --encoder-config-dir ${{inputs.encoder_config}} --mongo-uri-file ${{inputs.mongo_uri_file}} --database DTFPTOWR --collection flights --text-field reason --shadow-field ataRecoderMLSeed42 --days 10 --limit 100 --device cuda --output-jsonl ${{outputs.shadow_logs}}/predictions.jsonl
+resources:
+  instance_count: 1
