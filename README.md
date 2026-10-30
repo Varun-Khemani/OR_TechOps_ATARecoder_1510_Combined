@@ -2,6 +2,8 @@
 
 Single-seed productionization package for the validated DAPT20 hierarchical ATA classifier. The package is designed for **shadow scoring first**; it does not replace the legacy model's Mongo field and never enables automatic recoding.
 
+For the KPaaS integration handoff, repository access, deployment tasks, model contract, and rollout gates, see [HANDOFF.md](HANDOFF.md).
+
 ## Model and evaluation
 
 - Model: DAPT20 DeBERTa hierarchical classifier, seed 42.
